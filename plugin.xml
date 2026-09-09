@@ -66,7 +66,7 @@ so any valid user can still sign in from any portal page.
     <readme>https://github.com/agiteksenterprisesolutions/glpi_entity_login_portal/blob/main/README.md</readme>
     <changelog>https://github.com/agiteksenterprisesolutions/glpi_entity_login_portal/blob/main/CHANGELOG.md</changelog>
     <authors>
-        <author>Agiteks Enterprise Solutions</author>
+        <author>Agiteks</author>
     </authors>
     <versions>
         <version>

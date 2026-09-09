@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#1f2937"/>
+  <!-- three entity doors, one highlighted: each org gets its own way in -->
+  <g fill="none" stroke="#6b7280" stroke-width="16" stroke-linejoin="round">
+    <rect x="72"  y="150" width="104" height="212" rx="12"/>
+    <rect x="336" y="150" width="104" height="212" rx="12"/>
+  </g>
+  <rect x="204" y="118" width="104" height="276" rx="14" fill="#f5b544"/>
+  <circle cx="284" cy="256" r="13" fill="#1f2937"/>
+  <g fill="#6b7280">
+    <circle cx="152" cy="256" r="10"/>
+    <circle cx="416" cy="256" r="10"/>
+  </g>
+  <rect x="150" y="404" width="212" height="18" rx="9" fill="#f5b544" opacity="0.85"/>
+</svg>

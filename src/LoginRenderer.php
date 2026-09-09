@@ -4,7 +4,7 @@
 /**
  * ---------------------------------------------------------------------------
  * Entity Login Portals - give every GLPI entity its own login page.
- * Copyright (C) 2026 Agiteks Enterprise Solutions.
+ * Copyright (C) 2026 Agiteks.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free

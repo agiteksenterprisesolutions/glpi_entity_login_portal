@@ -1,5 +1,5 @@
 # Entity Login Portals - translation template.
-# Copyright (C) 2026 Agiteks Enterprise Solutions.
+# Copyright (C) 2026 Agiteks.
 # This file is distributed under the same licence as the plugin.
 #
 msgid ""
