@@ -1,0 +1,68 @@
+{#
+ # Admin form for a login portal.
+ #}
+{% extends "generic_show_form.html.twig" %}
+{% import "components/form/fields_macros.html.twig" as fields %}
+
+{% block more_fields %}
+
+    {{ fields.dropdownField('Entity', 'entities_id', item.fields['entities_id'], _n('Entity', 'Entities', 1), {
+        'required': true,
+        'helper': __('The organisation this login page belongs to.', 'entitylogin')
+    }) }}
+
+    {{ fields.textField('slug', item.fields['slug'], __('URL slug', 'entitylogin'), {
+        'required': true,
+        'helper': __('Lowercase letters, digits, dashes and underscores. This becomes the address of the login page.', 'entitylogin')
+    }) }}
+
+    {% if item.fields['slug'] is not empty and item.fields['id'] > 0 %}
+        {% set short_url = item.getPortalUrl() %}
+        {% set direct_url = item.getDirectPortalUrl() %}
+        <div class="form-field row col-12 mb-2">
+            <label class="col-form-label col-xxl-4 text-xxl-end">{{ __('Login page address', 'entitylogin') }}</label>
+            <div class="col-xxl-8">
+                <div class="form-control-plaintext">
+                    <div><code>{{ short_url }}</code>
+                        <span class="text-muted ms-2">{{ __('(requires the reverse-proxy rewrite)', 'entitylogin') }}</span>
+                    </div>
+                    <div class="mt-1"><code>{{ direct_url }}</code>
+                        <span class="text-muted ms-2">{{ __('(always works)', 'entitylogin') }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="form-field row col-12 mb-2">
+        <label class="col-form-label col-xxl-4 text-xxl-end" for="entitylogin_providers">
+            {{ __('SSO providers shown on this page', 'entitylogin') }}
+        </label>
+        <div class="col-xxl-8">
+            {% if provider_groups is empty %}
+                <div class="alert alert-info mb-0">
+                    {{ __('No SSO providers are available. Install and configure a supported SSO plugin (samlSSO or Single Sign-On) first.', 'entitylogin') }}
+                </div>
+            {% else %}
+                {% set total = 0 %}
+                {% for group in provider_groups %}{% set total = total + group.providers|length %}{% endfor %}
+                <select name="_providers[]" id="entitylogin_providers" class="form-select" multiple size="{{ min(total + provider_groups|length, 10) }}">
+                    {% for source_key, group in provider_groups %}
+                        <optgroup label="{{ group.label }}">
+                            {% for provider in group.providers %}
+                                {% set token = source_key ~ ':' ~ provider.id %}
+                                <option value="{{ token }}" {{ token in selected ? 'selected' : '' }}>
+                                    {{ provider.name }}{% if provider.note %} — {{ provider.note }}{% endif %}
+                                </option>
+                            {% endfor %}
+                        </optgroup>
+                    {% endfor %}
+                </select>
+                <small class="form-hint">
+                    {{ __('Hold Ctrl (or Cmd) to select several. Inactive and domain-bound providers are never displayed on the login page even if selected.', 'entitylogin') }}
+                </small>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

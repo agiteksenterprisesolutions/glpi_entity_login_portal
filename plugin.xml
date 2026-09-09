@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <name>Entity Login Portals</name>
+    <key>entitylogin</key>
+    <state>stable</state>
+    <logo>https://raw.githubusercontent.com/agiteksenterprisesolutions/glpi_entity_login_portal/main/plugin.png</logo>
+    <description>
+        <short>
+            <en>Give every GLPI entity its own login page, showing only that entity's SSO providers.</en>
+        </short>
+        <long>
+            <en><![CDATA[
+## Entity Login Portals
+
+When several organisations share one GLPI, every SSO button appears on the same
+login page: ten organisations means ten buttons, and every user sees all of them.
+
+This plugin gives each entity its own login page, reached by a slug:
+
+- `https://glpi.example.com/` — the login form, with **no** SSO buttons
+- `https://glpi.example.com/acme` — the login form plus **only** Acme's SSO
+- `https://glpi.example.com/globex` — the login form plus **only** Globex's SSO
+
+### How it works
+
+Supported SSO plugins list every configured provider globally, with no entity
+awareness. This plugin takes over the button rendering and scopes the list to
+the portal being visited, emitting markup that keeps each SSO plugin's own
+contract — so the authentication flows themselves are completely untouched.
+
+**GLPI core is not modified, and neither is any SSO plugin.** Their tables are
+only ever read. Deactivating this plugin instantly restores the original
+behaviour; uninstalling drops only this plugin's two tables.
+
+### Supported SSO plugins
+
+- **samlSSO** (`samlsso`) — SAML 2.0
+- **Single Sign-On** (`singlesignon`) — OAuth 2.0 / OpenID Connect
+
+Providers from both can be mixed on a single portal. At least one of them must
+be installed for the plugin to be useful.
+
+### Short URLs
+
+GLPI serves plugin routes under `/plugins/<key>/`, so portals work out of the box
+at `/plugins/entitylogin/portal/<slug>`. The short `/acme` form is produced by a
+one-line rewrite on your reverse proxy; ready-made recipes for **nginx**,
+**Traefik** and **Caddy** are in the README.
+
+### Requirements
+
+- GLPI 11.0.x
+- One of the supported SSO plugins
+
+### Scope
+
+A portal controls which SSO buttons are *displayed*. It is a presentation
+boundary, not an access-control boundary: login behaviour itself is unchanged,
+so any valid user can still sign in from any portal page.
+]]></en>
+        </long>
+    </description>
+    <homepage>https://github.com/agiteksenterprisesolutions/glpi_entity_login_portal</homepage>
+    <download>https://github.com/agiteksenterprisesolutions/glpi_entity_login_portal/releases</download>
+    <issues>https://github.com/agiteksenterprisesolutions/glpi_entity_login_portal/issues</issues>
+    <readme>https://github.com/agiteksenterprisesolutions/glpi_entity_login_portal/blob/main/README.md</readme>
+    <changelog>https://github.com/agiteksenterprisesolutions/glpi_entity_login_portal/blob/main/CHANGELOG.md</changelog>
+    <authors>
+        <author>Agiteks Enterprise Solutions</author>
+    </authors>
+    <versions>
+        <version>
+            <num>1.1.0</num>
+            <compatibility>~11.0</compatibility>
+            <download_url>https://github.com/agiteksenterprisesolutions/glpi_entity_login_portal/releases/download/v1.1.0/entitylogin.zip</download_url>
+        </version>
+    </versions>
+    <langs>
+        <lang>en_GB</lang>
+    </langs>
+    <license>GPLv3+</license>
+    <tags>
+        <en>
+            <tag>Authentication</tag>
+            <tag>Setup</tag>
+            <tag>Management</tag>
+        </en>
+    </tags>
+    <screenshots>
+        <screenshot>https://raw.githubusercontent.com/agiteksenterprisesolutions/glpi_entity_login_portal/main/screenshots/portal-login.png</screenshot>
+        <screenshot>https://raw.githubusercontent.com/agiteksenterprisesolutions/glpi_entity_login_portal/main/screenshots/generic-login.png</screenshot>
+        <screenshot>https://raw.githubusercontent.com/agiteksenterprisesolutions/glpi_entity_login_portal/main/screenshots/portal-form.png</screenshot>
+    </screenshots>
+</root>

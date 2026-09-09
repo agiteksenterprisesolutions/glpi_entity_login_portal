@@ -1,0 +1,92 @@
+# Entity Login Portals - translation template.
+# Copyright (C) 2026 Agiteks Enterprise Solutions.
+# This file is distributed under the same licence as the plugin.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Entity Login Portals 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/agiteksenterprisesolutions/"
+"glpi_entity_login_portal/issues\n"
+"PO-Revision-Date: 2026-09-09 18:53\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en_GB\n"
+"POT-Creation-Date: 2026-09-09 18:53\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "\"%s\" is reserved by GLPI and cannot be used as a URL slug."
+msgstr "\"%s\" is reserved by GLPI and cannot be used as a URL slug."
+
+msgid "(always works)"
+msgstr "(always works)"
+
+msgid "(requires the reverse-proxy rewrite)"
+msgstr "(requires the reverse-proxy rewrite)"
+
+msgid ""
+"Hold Ctrl (or Cmd) to select several. Inactive and domain-bound providers "
+"are never displayed on the login page even if selected."
+msgstr ""
+"Hold Ctrl (or Cmd) to select several. Inactive and domain-bound providers "
+"are never displayed on the login page even if selected."
+
+msgid "Inactive portals return \"not found\"."
+msgstr "Inactive portals return \"not found\"."
+
+msgid "Login page address"
+msgstr "Login page address"
+
+msgid "Login with external provider"
+msgstr "Login with external provider"
+
+msgid ""
+"Lowercase letters, digits, dashes and underscores. This becomes the address "
+"of the login page."
+msgstr ""
+"Lowercase letters, digits, dashes and underscores. This becomes the address "
+"of the login page."
+
+msgid ""
+"No SSO providers are available. Install and configure a supported SSO plugin "
+"(samlSSO or Single Sign-On) first."
+msgstr ""
+"No SSO providers are available. Install and configure a supported SSO plugin "
+"(samlSSO or Single Sign-On) first."
+
+msgid "SSO providers shown on this page"
+msgstr "SSO providers shown on this page"
+
+msgid "The URL slug \"%s\" is already used by another portal."
+msgstr "The URL slug \"%s\" is already used by another portal."
+
+msgid ""
+"The URL slug must be 2 to 64 characters long and may only contain lowercase "
+"letters, digits, dashes and underscores."
+msgstr ""
+"The URL slug must be 2 to 64 characters long and may only contain lowercase "
+"letters, digits, dashes and underscores."
+
+msgid "The organisation this login page belongs to."
+msgstr "The organisation this login page belongs to."
+
+msgid "URL slug"
+msgstr "URL slug"
+
+msgid "domain-bound: %s"
+msgstr "domain-bound: %s"
+
+msgid "inactive"
+msgstr "inactive"
+
+msgid "Login portal"
+msgid_plural "Login portals"
+msgstr[0] "Login portal"
+msgstr[1] "Login portals"
+
+msgid "Portal provider"
+msgid_plural "Portal providers"
+msgstr[0] "Portal provider"
+msgstr[1] "Portal providers"

@@ -1,0 +1,17 @@
+# Build output
+/dist/
+/*.zip
+/*.tar.gz
+/*.tar.bz2
+
+# Dependencies (this plugin ships none)
+/vendor/
+
+# Compiled translation catalogues are built from the .po files
+# (kept in the release archive, not required in the repository)
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store

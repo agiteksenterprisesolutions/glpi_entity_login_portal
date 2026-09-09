@@ -1,0 +1,84 @@
+{#
+ # SSO buttons for a login portal.
+ #
+ # Each button keeps the contract of the SSO plugin it came from, so the
+ # authentication flow behind it is unchanged:
+ #   - 'submit' buttons submit GLPI's login form with the provider id in the
+ #     field that plugin reads (samlSSO).
+ #   - 'link' buttons point straight at the plugin's callback URL (Single
+ #     Sign-On / OAuth).
+ #}
+<div class="plugin_entitylogin_login">
+    <div class="card-header" id="entitylogin_header">
+        <h2>{{ header }}</h2>
+    </div>
+    <div class="row align-items-start" id="entitylogin_buttons" style="max-width: 300px; margin-top: 40px;">
+        {% for button in buttons %}
+            <div class="col-sm-6">
+                {% if button.kind == 'link' %}
+                    <a href="{{ button.href }}"
+                       class="btn btn-light entitylogin-button"
+                       {% if button.style %}style="width: 125px; margin-bottom: 30px; {{ button.style }}"{% else %}style="width: 125px; margin-bottom: 30px;"{% endif %}
+                       {% if button.popup %}data-entitylogin-popup="true"{% endif %}>
+                        <span style="cursor: pointer; margin: 10px 0 5px 0; display: block;">
+                            <span class="d-flex flex-column">
+                                {% if button.picture %}
+                                    <img src="{{ button.picture }}" alt="" class="entitylogin-picture" style="max-height: 48px; object-fit: contain;"/>
+                                {% else %}
+                                    <i class="{{ button.icon|striptags }} fa-5x"></i>
+                                {% endif %}
+                                <span><b>{{ button.name|striptags }}</b></span>
+                            </span>
+                        </span>
+                    </a>
+                {% else %}
+                    <button type="submit" name="{{ button.field }}" value="{{ button.id }}"
+                            class="btn btn-light entitylogin-button"
+                            style="width: 125px; margin-bottom: 30px;">
+                        <div style="cursor: pointer; margin: 10px 0 5px 0;">
+                            <div class="d-flex flex-column">
+                                <i class="{{ button.icon|striptags }} fa-5x"></i>
+                                <span><b>{{ button.name|striptags }}</b></span>
+                            </div>
+                        </div>
+                    </button>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% if buttons|filter(b => b.popup)|length > 0 %}
+    <script>
+    // Opens popup-flagged providers in a window, matching the behaviour of the
+    // SSO plugin these buttons came from.
+    (function () {
+        document.addEventListener('click', function (event) {
+            var trigger = event.target.closest('[data-entitylogin-popup="true"]');
+            if (!trigger) {
+                return;
+            }
+            event.preventDefault();
+            var width = 600, height = 800;
+            var left = (window.innerWidth / 2) - (width / 2);
+            var top = (window.innerHeight / 2) - (height / 2);
+            var url = trigger.getAttribute('href');
+            url += (url.indexOf('?') === -1 ? '?' : '&') + 'popup=1';
+            window.open(url, 'entitylogin_sso', 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top);
+        });
+        if (window.opener) {
+            window.opener.location = window.location;
+            window.close();
+        }
+    })();
+    </script>
+{% endif %}
+
+{% if hide_login_fields %}
+    {# Honours samlSSO's global "hide login fields" setting. #}
+    <style>
+        .card-body div.mb-4:has(#login_password) { display: none; }
+        .card-body div.mb-3:has([id^="dropdown_auth"]) { display: none; }
+        .card-body div.mb-2:has(#login_remember) { display: none; }
+    </style>
+{% endif %}

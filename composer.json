@@ -1,0 +1,24 @@
+{
+    "name": "agiteks/glpi-entitylogin",
+    "description": "Give every GLPI entity its own login page, showing only that entity's SSO providers.",
+    "type": "glpi-plugin",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Agiteks Enterprise Solutions",
+            "homepage": "https://github.com/agiteksenterprisesolutions"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/agiteksenterprisesolutions/glpi_entity_login_portal/issues",
+        "source": "https://github.com/agiteksenterprisesolutions/glpi_entity_login_portal"
+    },
+    "require": {
+        "php": ">=8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "GlpiPlugin\\Entitylogin\\": "src/"
+        }
+    }
+}
