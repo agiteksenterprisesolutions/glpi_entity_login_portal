@@ -1,0 +1,70 @@
+{#
+ # Portal fields appended to the entity form, so the login page of an
+ # organisation is configured where the organisation itself is.
+ #}
+{% import "components/form/fields_macros.html.twig" as fields %}
+
+<div class="card-body border-top" data-testid="entitylogin-entity-fields">
+    <h3 class="mb-3">
+        <i class="ti ti-door-enter me-1"></i>{{ __('Login portal', 'entitylogin') }}
+    </h3>
+
+    <div class="row">
+        {{ fields.textField(slug_field, slug, __('URL slug', 'entitylogin'), {
+            'helper': __('Gives this entity its own login page. Lowercase letters, digits, dashes and underscores. Leave empty for no dedicated login page.', 'entitylogin'),
+            'full_width': true
+        }) }}
+    </div>
+
+    <div class="row">
+        <div class="form-field row col-12 mb-2">
+            <label class="col-form-label col-xxl-2 text-xxl-end" for="entitylogin_entity_providers">
+                {{ __('SSO providers shown on this page', 'entitylogin') }}
+            </label>
+            <div class="col-xxl-10 field-container">
+                {% if provider_groups is empty %}
+                    <div class="alert alert-info mb-0 py-2">
+                        {{ __('No SSO providers are available. Install and configure a supported SSO plugin (samlSSO or Single Sign-On) first.', 'entitylogin') }}
+                    </div>
+                {% else %}
+                    {% set total = 0 %}
+                    {% for group in provider_groups %}{% set total = total + group.providers|length %}{% endfor %}
+                    <select name="{{ providers_field }}[]" id="entitylogin_entity_providers" class="form-select" multiple
+                            size="{{ min(total + provider_groups|length, 8) }}">
+                        {% for source_key, group in provider_groups %}
+                            <optgroup label="{{ group.label }}">
+                                {% for provider in group.providers %}
+                                    {% set token = source_key ~ ':' ~ provider.id %}
+                                    <option value="{{ token }}" {{ token in selected ? 'selected' : '' }}>
+                                        {{ provider.name }}{% if provider.note %} — {{ provider.note }}{% endif %}
+                                    </option>
+                                {% endfor %}
+                            </optgroup>
+                        {% endfor %}
+                    </select>
+                    <small class="form-hint">
+                        {{ __('Hold Ctrl (or Cmd) to select several.', 'entitylogin') }}
+                    </small>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% if portal is not null and short_url is not empty %}
+        <div class="row">
+            <div class="form-field row col-12 mb-0">
+                <label class="col-form-label col-xxl-2 text-xxl-end">{{ __('Login page address', 'entitylogin') }}</label>
+                <div class="col-xxl-10">
+                    <div class="form-control-plaintext">
+                        <div><code>{{ short_url }}</code>
+                            <span class="text-muted ms-2">{{ __('(requires the reverse-proxy rewrite)', 'entitylogin') }}</span>
+                        </div>
+                        <div class="mt-1"><code>{{ direct_url }}</code>
+                            <span class="text-muted ms-2">{{ __('(always works)', 'entitylogin') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>

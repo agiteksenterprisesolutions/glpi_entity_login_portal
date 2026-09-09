@@ -110,6 +110,20 @@ class Portal extends CommonDBTM
     }
 
     /**
+     * The portal of an entity, if it has one. Each entity has at most one.
+     */
+    public static function getForEntity(int $entities_id): ?self
+    {
+        $portal = new self();
+
+        if (!$portal->getFromDBByCrit(['entities_id' => $entities_id])) {
+            return null;
+        }
+
+        return $portal;
+    }
+
+    /**
      * Look up an active portal by slug.
      */
     public static function getBySlug(string $slug): ?self

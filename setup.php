@@ -37,9 +37,10 @@
  */
 
 use Glpi\Plugin\Hooks;
+use GlpiPlugin\Entitylogin\EntityForm;
 use GlpiPlugin\Entitylogin\Portal;
 
-define('PLUGIN_ENTITYLOGIN_VERSION', '1.1.0');
+define('PLUGIN_ENTITYLOGIN_VERSION', '1.2.0');
 define('PLUGIN_ENTITYLOGIN_MIN_GLPI', '11.0.0');
 define('PLUGIN_ENTITYLOGIN_MAX_GLPI', '11.9.99');
 
@@ -60,6 +61,16 @@ function plugin_init_entitylogin(): void
     // POST_INIT runs after every plugin has registered its hooks, which is the
     // only point where we can reliably suppress samlSSO's own button renderer.
     $PLUGIN_HOOKS[Hooks::POST_INIT]['entitylogin'] = 'plugin_entitylogin_post_init';
+
+    // Portal settings appear directly on the entity form, so an organisation's
+    // login page is configured where the organisation is.
+    $PLUGIN_HOOKS[Hooks::POST_ITEM_FORM]['entitylogin'] = [EntityForm::class, 'show'];
+    $PLUGIN_HOOKS[Hooks::ITEM_ADD]['entitylogin']       = ['Entity' => [EntityForm::class, 'save']];
+    // PRE_ITEM_UPDATE rather than ITEM_UPDATE: the latter only fires when an
+    // entity column actually changed, so editing just the slug - which is not
+    // an entity column - would be silently dropped.
+    $PLUGIN_HOOKS[Hooks::PRE_ITEM_UPDATE]['entitylogin'] = ['Entity' => [EntityForm::class, 'save']];
+    $PLUGIN_HOOKS[Hooks::ITEM_PURGE]['entitylogin']     = ['Entity' => [EntityForm::class, 'purge']];
 
     if (Session::getLoginUserID()) {
         // Configuration entry under Setup > Dropdowns is not appropriate here,

@@ -70,9 +70,9 @@ so any valid user can still sign in from any portal page.
     </authors>
     <versions>
         <version>
-            <num>1.1.0</num>
+            <num>1.2.0</num>
             <compatibility>~11.0</compatibility>
-            <download_url>https://github.com/agiteksenterprisesolutions/glpi_entity_login_portal/releases/download/v1.1.0/entitylogin.zip</download_url>
+            <download_url>https://github.com/agiteksenterprisesolutions/glpi_entity_login_portal/releases/download/v1.2.0/entitylogin.zip</download_url>
         </version>
     </versions>
     <langs>
@@ -87,6 +87,7 @@ so any valid user can still sign in from any portal page.
         </en>
     </tags>
     <screenshots>
+        <screenshot>https://raw.githubusercontent.com/agiteksenterprisesolutions/glpi_entity_login_portal/main/screenshots/entity-form.png</screenshot>
         <screenshot>https://raw.githubusercontent.com/agiteksenterprisesolutions/glpi_entity_login_portal/main/screenshots/portal-login.png</screenshot>
         <screenshot>https://raw.githubusercontent.com/agiteksenterprisesolutions/glpi_entity_login_portal/main/screenshots/generic-login.png</screenshot>
         <screenshot>https://raw.githubusercontent.com/agiteksenterprisesolutions/glpi_entity_login_portal/main/screenshots/portal-form.png</screenshot>

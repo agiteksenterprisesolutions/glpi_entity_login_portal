@@ -5,6 +5,23 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-09-09
+
+### Added
+
+- Portal settings are now editable **directly on the entity form**, under a
+  "Login portal" section: an organisation and its login page are configured in
+  one place, and a new entity can be created with its slug in a single step.
+  The list under **Setup > Login portals** remains as an overview.
+- Removing an entity, or clearing its slug, removes the matching portal and its
+  provider mappings.
+
+### Notes
+
+- Creating an entity still does **not** create a portal on its own: a portal
+  needs a slug and a set of providers, neither of which can be derived from the
+  entity. The entity form simply puts both within reach.
+
 ## [1.1.0] - 2026-09-09
 
 ### Added

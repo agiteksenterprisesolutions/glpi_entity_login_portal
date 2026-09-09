@@ -68,7 +68,18 @@ Support for another SSO plugin is a matter of implementing one interface — see
 
 ## Configuration
 
-Each portal is an entity, a URL slug, and the providers to offer:
+The quickest way is on the entity itself: **Administration > Entities**, open or
+create an organisation, and fill in the **Login portal** section. A new entity
+can be created with its slug and providers in a single step.
+
+![The Login portal section on the entity form](screenshots/entity-form.png)
+
+Clearing the slug removes that entity's portal; deleting the entity removes it
+too. Creating an entity does **not** create a portal on its own — a portal needs
+a slug and a set of providers, and neither can be derived from the entity.
+
+**Setup > Login portals** lists every portal, and is also where you can manage
+them independently of the entity form:
 
 ![The portal form](screenshots/portal-form.png)
 
